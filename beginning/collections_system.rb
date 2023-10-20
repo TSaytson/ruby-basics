@@ -1,9 +1,13 @@
+require 'io/console'
+
 $arr = Array.[]
 fname = "names.txt"
 $file = File.open(fname, 'a+')
 $file.readlines.map(&:chomp).each do |line|
   $arr.push(line)
 end
+
+STDOUT.clear_screen
 
 
 begin
