@@ -1,4 +1,10 @@
 $arr = Array.[]
+fname = "names.txt"
+$file = File.open(fname, 'a+')
+$file.readlines.map(&:chomp).each do |line|
+  $arr.push(line)
+end
+
 
 begin
   puts '1 - Add name'
@@ -15,6 +21,7 @@ begin
       raise TypeError 'Name is too short'
     end
     $arr.push(name)
+    $file.write name + "\n"
     rescue
       print "Name must have more than 2 characters\n"
   end

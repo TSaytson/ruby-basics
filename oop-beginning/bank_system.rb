@@ -65,7 +65,9 @@ begin
   when 3
     $bank.balance
   else
-    print "Invalid option"
+    if (option != 4)
+      print "Invalid option"
+    end
   end
   
 end until option == 4

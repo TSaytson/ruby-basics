@@ -25,7 +25,7 @@ file.puts translations
 
 file.close
 
-file = File.open('translations.json', 'r')
+file = File.open(fname, 'r')
 contents = file.read
 puts contents
 
