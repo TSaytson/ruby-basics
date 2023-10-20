@@ -1,13 +1,15 @@
 require 'io/console'
 
 $arr = Array.[]
-fname = "names.txt"
-$file = File.open(fname, 'a+')
-$file.readlines.map(&:chomp).each do |line|
+$fname = "names.txt"
+file = File.open($fname, 'a+')
+file.readlines.map(&:chomp).each do |line|
   $arr.push(line)
 end
+file.close()
 
 STDOUT.clear_screen
+print "Welcome to SayRuby Names Management System \n"
 
 
 begin
@@ -25,7 +27,6 @@ begin
       raise TypeError 'Name is too short'
     end
     $arr.push(name)
-    $file.write name + "\n"
     rescue
       print "Name must have more than 2 characters\n"
   end
@@ -47,8 +48,9 @@ begin
     end
     $arr.delete_at(index)
     print name + " deleted \n"
-    rescue
+    rescue  Exception => e
       print name + " does not exists \n"
+      print e.message
   end
 
   case option
@@ -58,10 +60,15 @@ begin
     list()
   when 3
     delete()
-  else
-    if option != 4
-      print "Please type one of the options below \n"
+  when 4
+    file = File.open($fname, 'w')
+    $arr.each do |name|
+      file.write name + "\n"
     end
+    print "Bye bye \n"
+
+  else
+      print "Please type one of the options below \n"
   end
 
 end until option == 4
